@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Đặt hàng thành công | Luxury Jewelry</title>
+    <%- include('partials/head') %>
+    
+    <style>
+        
+        body {
+            background-color: #f8f9fa; 
+        }
+        .success-container {
+            max-width: 600px;
+            margin: 80px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+        }
+        
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 25px;
+            color: #2e7d32; 
+        }
+
+        .order-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        .order-desc {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .order-id-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 40px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #333;
+        }
+
+        .btn-home {
+            background: #111;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-home:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('partials/head') %> 
+    
+    <div class="success-container">
+        <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+        </svg>
+
+        <h1 class="order-title">Cảm ơn bạn!</h1>
+        <p class="order-desc">
+            Đơn hàng của bạn đã được tiếp nhận thành công.<br>
+            Chúng tôi sẽ sớm liên hệ để giao món trang sức tuyệt vời này đến bạn.
+        </p>
+
+        <div class="order-id-box">
+            MÃ ĐƠN HÀNG: #<%= orderId %>
+        </div>
+        
+        <br>
+
+        <a href="/" class="btn-home">
+            Tiếp tục mua sắm
+        </a>
+    </div>
+
+</body>
+</html>

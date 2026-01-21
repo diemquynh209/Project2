@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Thanh toán | Luxury Jewelry</title>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/cart.css"> 
+    <style>
+        .checkout-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-weight: 600; display: block; margin-bottom: 8px; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Montserrat', sans-serif; }
+        .order-summary { background: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <h1 style="margin-bottom: 30px;">Xác nhận đơn hàng</h1>
+
+        <form action="/checkout/submit" method="POST" class="checkout-box">
+            
+            <div class="form-group">
+                <label class="form-label">Người nhận:</label>
+                <input type="text" class="form-input" value="<%= typeof user !== 'undefined' ? user : '' %>" disabled style="background: #eee;">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Địa chỉ giao hàng:</label>
+                <input type="text" name="address" class="form-input" placeholder="Nhập địa chỉ nhận hàng..." required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Phương thức thanh toán:</label>
+                <select name="payment_method" class="form-input">
+                    <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                    <option value="Banking">Chuyển khoản ngân hàng</option>
+                </select>
+            </div>
+
+            <div class="order-summary">
+                <h3>Tóm tắt:</h3>
+                <% cart.forEach(item => { %>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+                        <span><%= item.quantity %>x <%= item.name %></span>
+                        <span><%= Number(item.price * item.quantity).toLocaleString('vi-VN') %> ₫</span>
+                    </div>
+                <% }) %>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ddd;">
+                <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: bold;">
+                    <span>Tổng tiền:</span>
+                    <span style="color: #b71c1c;"><%= Number(total).toLocaleString('vi-VN') %> ₫</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-checkout" style="width: 100%; text-align: center; margin-top: 20px;">
+                ĐẶT HÀNG NGAY
+            </button>
+            
+            <a href="/cart" style="display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none;">
+                Quay lại giỏ hàng
+            </a>
+
+        </form>
+    </div>
+</body>
+</html>

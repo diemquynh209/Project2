@@ -1,0 +1,66 @@
+/* Container chính của giỏ hàng */
+.cart-container { 
+    max-width: 900px; 
+    margin: 60px auto; 
+    padding: 0 20px; 
+    min-height: 60vh; /* Giữ độ cao tối thiểu cho đẹp */
+}
+
+/* Bảng sản phẩm */
+.cart-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 30px; 
+    background: #fff;
+}
+.cart-table th { 
+    padding: 15px; 
+    border-bottom: 2px solid #eee; 
+    text-align: left; 
+    font-family: 'Playfair Display', serif; /* Font tiêu đề sang trọng */
+    font-size: 18px;
+}
+.cart-table td { 
+    padding: 20px 15px; 
+    border-bottom: 1px solid #eee; 
+    vertical-align: middle;
+}
+
+/* Nút Thanh toán (Màu đen - Nổi bật nhất) */
+.btn-checkout { 
+    background: #222; 
+    color: #fff; 
+    padding: 15px 35px; 
+    text-decoration: none; 
+    display: inline-block; 
+    margin-top: 25px; 
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+.btn-checkout:hover { 
+    background: #444; 
+    transform: translateY(-2px); /* Hiệu ứng nhấc nhẹ lên khi di chuột */
+}
+
+/* Nút Tiếp tục mua sắm (Màu trắng, viền xám - Nút phụ) */
+.btn-continue {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa mũi tên và chữ */
+    margin-top: 40px;
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 30px; /* Bo tròn mềm mại */
+    transition: all 0.3s;
+}
+.btn-continue:hover {
+    color: #000;
+    border-color: #000;
+    background: #fafafa;
+}

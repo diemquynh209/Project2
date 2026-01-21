@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title><%= title %> | Luxury Jewelry</title>
+    
+    <%- include('partials/head') %>
+
+    <link rel="stylesheet" href="/css/products.css"> 
+</head>
+<body>
+
+    <nav class="navbar-product">
+        <a href="/" class="btn-back">
+            <span>←</span> Quay lại
+        </a>
+        <a href="/" class="nav-brand">
+            <img src="/images/home-icon.png" alt="Home" style="width: 35px;">
+            <span>LuxuryJewelry</span>
+        </a>
+        <a href="/cart" class="nav-cart" style="margin-left: auto;"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        
+        <% if (cart && cart.length > 0) { %>
+            <span class="cart-badge">
+                <%= cart.reduce((total, item) => total + item.quantity, 0) %>
+            </span>
+        <% } %>
+    </a>
+    </nav>
+
+    <div class="hero-section">
+        <h1 class="page-title"><%= title %></h1>
+        <p class="sub-title">TUYỆT TÁC TRANG SỨC DÀNH CHO BẠN</p>
+    </div>
+
+    <div class="container">
+        
+        <% if (products.length === 0) { %>
+            <div style="text-align: center; padding: 50px; color: #666;">
+                <h3 style="font-family: 'Montserrat', sans-serif;">Chưa có sản phẩm nào.</h3>
+                <p>Vui lòng quay lại sau.</p>
+            </div>
+        <% } else { %>
+            
+            <div class="product-grid">
+                <% products.forEach(p => { %>
+                    <div class="product-card">
+                        <div class="card-img-wrapper">
+                            <img src="<%= p.image_url %>" alt="<%= p.name %>">
+                            <a href="/cart/add/<%= p.product_id %>" class="add-to-cart-btn">Thêm Vào Giỏ</a>
+                        </div>
+                        
+                        <div class="card-info">
+                            <span class="brand-name"><%= p.brand_name %></span>
+                            <h3 class="product-name"><%= p.name %></h3>
+                            <div class="product-price">
+                                <%= Number(p.price).toLocaleString('vi-VN') %> ₫
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+
+        <% } %>
+
+    </div>
+
+</body>
+</html>

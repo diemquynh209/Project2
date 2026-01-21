@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Giỏ hàng của bạn | Luxury Jewelry</title>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+    
+    <div style="padding: 20px;">
+        <a href="/" class="nav-brand">
+            <img src="/images/home-icon.png" alt="Home" style="width: 30px;">
+        </a>
+    </div>
+
+    <div class="cart-container">
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 36px;">Giỏ hàng của bạn</h1>
+        
+        <% if (!cart || cart.length === 0) { %>
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-size: 18px; color: #888;">Giỏ hàng đang trống trơn...</p>
+                <a href="/" class="btn-checkout" style="margin-top: 20px;">Đi mua sắm ngay</a>
+            </div>
+        <% } else { %>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th width="50%">Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let total = 0; %>
+                    <% cart.forEach(item => { %>
+                        <% let subtotal = item.price * item.quantity; %>
+                        <% total += subtotal; %>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <img src="<%= item.image_url || '/images/no-image.jpg' %>" width="70" style="border-radius: 4px; object-fit: cover;">
+                                    <div>
+                                        <strong><%= item.name %></strong>
+                                        <br>
+                                        <a href="/cart/remove/<%= item.product_id %>" style="color: #999; font-size: 13px; text-decoration: underline;">Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><%= Number(item.price).toLocaleString('vi-VN') %> ₫</td>
+                            <td>
+                                <input 
+                                    type="number" 
+                                    value="<%= item.quantity %>" 
+                                    min="1"
+                                    style="width: 60px; padding: 5px; text-align: center; border: 1px solid #ddd; border-radius: 4px;"
+                                    onchange="updateQuantity('<%= item.product_id %>', this.value)"
+                                >
+                            </td>
+                            <td style="font-weight: bold;"><%= Number(subtotal).toLocaleString('vi-VN') %> ₫</td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            
+            <div style="text-align: right; margin-top: 30px;">
+                <div style="font-size: 20px; margin-bottom: 20px;">
+                    Tổng cộng: <strong style="font-size: 28px; color: #b71c1c;"><%= Number(total).toLocaleString('vi-VN') %> ₫</strong>
+                </div>
+                <a href="/checkout" class="btn-checkout">Tiến hành thanh toán →</a>
+            </div>
+        <% } %>
+        
+        <a href="/" class="btn-continue">
+            <span>←</span> Tiếp tục mua sắm
+        </a>
+    </div>
+    
+    <script>
+    function updateQuantity(productId, newQty) {
+        if (newQty < 1) {
+            alert('Số lượng phải ít nhất là 1');
+            window.location.reload();
+            return;
+        }
+        window.location.href = `/cart/update/${productId}/${newQty}`;
+    }
+    </script>
+
+</body>
+</html>
