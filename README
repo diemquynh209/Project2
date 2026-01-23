@@ -6,7 +6,7 @@
 
 # Hướng dẫn Cài đặt & Chạy dự án
 #  Chuẩn bị Cơ sở dữ liệu (MySQL)
-Chạy lần lượt theo đúng thứ tự sau để tránh lỗi khóa ngoại:
+Chạy file run_all.sql hoặc lần lượt theo đúng thứ tự sau để tránh lỗi khóa ngoại:
 1. - Chạy file `schema.sql` 
 
 2. - Chạy `users.sql` 
