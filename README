@@ -1,0 +1,27 @@
+# Đồ án Website Bán Hàng Trang Sức (Luxury Jewelry)
+# Công nghệ sử dụng
+- **Backend:** NodeJS (ExpressJS)
+- **Database:** MySQL
+- **Frontend:** EJS Template Engine, CSS
+
+# Hướng dẫn Cài đặt & Chạy dự án
+#  Chuẩn bị Cơ sở dữ liệu (MySQL)
+Chạy lần lượt theo đúng thứ tự sau để tránh lỗi khóa ngoại:
+1. - Chạy file `schema.sql` 
+
+2. - Chạy `users.sql` 
+   - Chạy `brands.sql` 
+   - Chạy `categories.sql` 
+
+3. - Chạy `products.sql`
+
+ #Kiểm tra cấu hình:
+   - Mở file `utils/db.js` (hoặc nơi cấu hình kết nối DB) trong code.
+   - Cập nhật thông tin `user` và `password` MySQL cho khớp với máy của bạn.
+
+#Cài đặt thư viện
+Mở terminal tại thư mục dự án và chạy lệnh:
+```bash
+npm install
+#Khởi chạy Server
+node app.js
