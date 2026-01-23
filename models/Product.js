@@ -9,8 +9,8 @@ class Product {
             FROM products p 
             LEFT JOIN brands b ON p.brand_id = b.brand_id
             LEFT JOIN product_images pi ON p.product_id = pi.product_id AND pi.is_main = 1
-            GROUP BY p.product_id
-        `;
+            ORDER BY p.created_at DESC`;
+       
         const [rows] = await db.execute(sql);
         return rows;
     }
