@@ -1,5 +1,3 @@
-/* File: run_all.sql - PHIÊN BẢN CHUẨN (Fix lỗi hỏng bảng Users) */
-
 -- 1. XÓA DATABASE CŨ (Để sửa lỗi bảng bị hỏng/crash)
 DROP DATABASE IF EXISTS web_ban_hang;
 
@@ -7,13 +5,9 @@ DROP DATABASE IF EXISTS web_ban_hang;
 CREATE DATABASE web_ban_hang;
 USE web_ban_hang;
 
--- Tắt kiểm tra khóa ngoại tạm thời để tạo bảng không bị lỗi thứ tự
 SET FOREIGN_KEY_CHECKS = 0;
 
--- ====================================================
 -- PHẦN 1: TẠO CẤU TRÚC BẢNG (STRUCTURE)
--- ====================================================
-
 -- 1.1. Bảng Users
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -129,10 +123,7 @@ CREATE TABLE reviews (
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 );
 
--- ====================================================
 -- PHẦN 2: NẠP DỮ LIỆU MẪU (DATA)
--- ====================================================
-
 -- 2.1. Nạp Users
 INSERT INTO users (user_id, username, password, email, full_name, role, phone, address) VALUES 
 (1, 'admin', '123456', 'admin@gmail.com', 'Quản Trị Viên', 'Admin', '0909123456', 'Hà Nội'),

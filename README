@@ -8,7 +8,7 @@
 #  Chuẩn bị Cơ sở dữ liệu (MySQL)
 Chạy file run_all.sql hoặc lần lượt theo đúng thứ tự sau để tránh lỗi khóa ngoại:
 1. - Chạy file `schema.sql` 
-
+git add .
 2. - Chạy `users.sql` 
    - Chạy `brands.sql` 
    - Chạy `categories.sql` 
