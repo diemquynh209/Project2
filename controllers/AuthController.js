@@ -23,13 +23,13 @@ const AuthController = {
             req.session.username = user.username;
             req.session.role = user.role;      // Phân quyền (Admin/Seller/Customer)
 
-            // Điều hướng dựa trên vai trò (Logic nghiệp vụ nâng cao)
+            // Điều hướng dựa trên vai trò 
             if (user.role === 'Seller') {
-                return res.redirect('/seller/dashboard'); // Nếu là người bán thì vào trang quản lý
+                return res.redirect('/seller/dashboard'); 
             }
             
             if (user.role === 'Admin') {
-                return res.redirect('/admin/users'); // Nếu là Admin thì vào trang quản trị
+                return res.redirect('/admin/users'); 
             }
 
             res.redirect('/'); // Khách hàng thì về trang chủ
@@ -47,9 +47,8 @@ const AuthController = {
     // 4. Xử lý Đăng ký
     postRegister: async (req, res) => {
         try {
-            // Lấy thêm phone và address nếu form đăng ký có
+
             const { username, password, email, full_name, phone, address } = req.body;
-            
             // Gọi Model tạo user mới 
             await User.create({ username, password, email, full_name, phone, address });
             

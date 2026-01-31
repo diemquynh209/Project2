@@ -1,15 +1,13 @@
 const Product = require('../models/Product');
 
 const ProductController = {
-    // 1. Trang chủ:
-    // File: controllers/ProductController.js
+
 
     index: async (req, res) => {
         try {
-            // 1. Lấy dữ liệu từ Model
+            // Lấy dữ liệu từ Model
             const allProducts = await Product.getAll();
 
-            // 2. IN RA MÀN HÌNH TERMINAL ĐỂ KIỂM TRA (DEBUG)
             
             if (allProducts.length > 0) {
             } else {
@@ -23,9 +21,6 @@ const ProductController = {
                 cart: req.session.cart || []
             });
         } catch (err) {
-            // In lỗi chi tiết ra Terminal nếu có
-            console.error("!!! LỖI NGHIÊM TRỌNG !!!");
-            console.error(err);
             res.send("Lỗi tải dữ liệu: " + err.message);
         }
     },
