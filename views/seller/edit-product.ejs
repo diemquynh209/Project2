@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa sản phẩm | Kênh Người Bán</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5 mb-5">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="mb-0">✏️ Chỉnh sửa sản phẩm: <%= product.name %></h3>
+            </div>
+            
+            <div class="card-body">
+                <form action="/seller/edit/<%= product.product_id %>" method="POST">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Tên sản phẩm</label>
+                                <input type="text" name="name" class="form-control" value="<%= product.name %>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Giá bán (VNĐ)</label>
+                                <input type="number" name="price" class="form-control" value="<%= product.price %>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Số lượng trong kho</label>
+                                <input type="number" name="stock_qty" class="form-control" value="<%= product.stock_qty %>" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Link Hình Ảnh (URL)</label>
+                                <input type="text" name="image_url" class="form-control" value="<%= product.image_url %>" required placeholder="https://...">
+                                
+                                <div class="mt-2 text-center">
+                                    <p class="text-muted small">Ảnh hiện tại:</p>
+                                    <img src="<%= product.image_url %>" alt="Preview" style="height: 100px; border: 1px solid #ddd; padding: 2px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Danh mục (Category)</label>
+                            <select name="category_id" class="form-select">
+                                <option value="1" <%= product.category_id == 1 ? 'selected' : '' %>>Vòng tay</option>
+                                <option value="2" <%= product.category_id == 2 ? 'selected' : '' %>>Dây chuyền</option>
+                                <option value="3" <%= product.category_id == 3 ? 'selected' : '' %>>Nhẫn</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Thương hiệu (Brand)</label>
+                            <select name="brand_id" class="form-select">
+                                <option value="1" <%= product.brand_id == 1 ? 'selected' : '' %>>Pandora</option>
+                                <option value="2" <%= product.brand_id == 2 ? 'selected' : '' %>>SJC</option>
+                                <option value="3" <%= product.brand_id == 3 ? 'selected' : '' %>>No Brand</option>
+                                <option value="5" <%= product.brand_id == 5 ? 'selected' : '' %>>PNJ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Mô tả chi tiết</label>
+                        <textarea name="description" class="form-control" rows="5"><%= product.description %></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="/seller/dashboard" class="btn btn-secondary">Hủy bỏ</a>
+                        <button type="submit" class="btn btn-primary">💾 Lưu thay đổi</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -19,7 +19,8 @@ const AuthController = {
             }
 
             // Cập nhật Session với các trường mới
-            req.session.userId = user.user_id; // Quan trọng: Dùng cho Checkout và Seller
+            req.session.user = user;
+            req.session.userId = user.user_id; 
             req.session.username = user.username;
             req.session.role = user.role;      // Phân quyền (Admin/Seller/Customer)
 

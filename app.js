@@ -7,21 +7,24 @@ const session = require('express-session');
 const ProductController = require('./controllers/ProductController');
 const AuthController = require('./controllers/AuthController');
 const checkoutRoutes = require('./routes/checkout');
+const sellerRouter = require('./routes/seller');
+
 
 // Import Routes
 const cartRoutes = require('./routes/cart');
 
-// 1. Cấu hình View Engine
+
+// Cấu hình View Engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// 2. Cấu hình đọc dữ liệu Form
+//  Cấu hình đọc dữ liệu Form
 app.use(express.urlencoded({ extended: true }));
 
-// 3. Cấu hình thư mục Public (CSS, Ảnh)
+// Cấu hình thư mục Public (CSS, Ảnh)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 4. Cấu hình Session (QUAN TRỌNG: PHẢI ĐẶT TRƯỚC CÁC ROUTE)
+//  Cấu hình Session 
 app.use(session({
     secret: 'my_secret_key',
     resave: false,
@@ -29,19 +32,17 @@ app.use(session({
     cookie: { secure: false } // false vì đang chạy localhost
 }));
 
-// 5. Middleware truyền biến xuống view (Chạy sau Session)
+//  Middleware truyền biến xuống view (Chạy sau Session)
 app.use((req, res, next) => {
     // Lưu thông tin user
-    res.locals.user = req.session.username || null;
-    res.locals.role = req.session.role || null;
-    
+    res.locals.user = req.session.user;
     // Lưu thông tin giỏ hàng (Để hiển thị số lượng trên menu)
     res.locals.cart = req.session.cart || [];
-    
     next();
 });
 
-// --- 6. ĐỊNH TUYẾN (ROUTES)  ---
+// ĐỊNH TUYẾN (ROUTES)  ---
+app.use('/seller', sellerRouter);
 
 // Route Giỏ hàng 
 app.use('/cart', cartRoutes);

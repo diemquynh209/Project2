@@ -12,7 +12,7 @@
         </a>
         <div class="nav-links">
             <% if (user) { %>
-                <span class="user-name">Xin chào, <%= user %></span>
+                <span class="user-name">Xin chào, <b><%= user.full_name || user.username %></b></span>
                 <a href="/logout" class="btn-auth btn-login">Đăng xuất</a>
             <% } else { %>
                 <a href="/login" class="btn-auth btn-login">Đăng nhập</a>
