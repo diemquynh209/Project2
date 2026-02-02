@@ -1,10 +1,10 @@
 const Product = require('../models/Product');
 
 const SellerController = {
-    // 1. Hiển thị Dashboard (Danh sách sản phẩm của Seller)
+    // 1. Hiển thị Dashboard
     getDashboard: async (req, res) => {
         try {
-            const sellerId = req.session.user.user_id; // Lấy ID từ session
+            const sellerId = req.session.user.user_id; 
             const products = await Product.getBySellerId(sellerId);
             res.render('seller/dashboard', { products });
         } catch (err) {
@@ -21,6 +21,7 @@ const SellerController = {
     // 3. Xử lý Thêm mới
     postAddProduct: async (req, res) => {
         try {
+            // Chuẩn bị dữ liệu từ form
             const data = {
                 seller_id: req.session.user.user_id,
                 name: req.body.name,
@@ -29,9 +30,18 @@ const SellerController = {
                 stock_qty: req.body.stock_qty,
                 brand_id: req.body.brand_id,
                 category_id: req.body.category_id,
-                image_url: req.body.image_url // Link ảnh online
+                image_url: req.body.image_url 
             };
-            await Product.create(data);
+            
+            // Tạo mảng hình ảnh cho hàm create mới
+            const images = [];
+            if (data.image_url) {
+                images.push({ url: data.image_url, isMain: 1 });
+            }
+
+            // Gọi hàm create (truyền đủ 2 tham số: data và images)
+            await Product.create(data, images);
+            
             res.redirect('/seller/dashboard');
         } catch (err) {
             console.log(err);
@@ -39,13 +49,35 @@ const SellerController = {
         }
     },
 
-    // 4. Hiển thị form Sửa
+    // 4. Hiển thị form Sửa 
     getEditProduct: async (req, res) => {
         try {
-            const product = await Product.findById(req.params.id);
-            // Kiểm tra xem sản phẩm có thuộc về seller này không
+            // SỬA 1: Đổi findById thành getById
+            const product = await Product.getById(req.params.id);
+            
+            if (!product) {
+                return res.redirect('/seller/dashboard');
+            }
+
+            // SỬA 2: Xử lý hiển thị ảnh 
+            
+            if (product.images && product.images.length > 0) {
+        
+                const mainImage = product.images.find(img => img.is_main == 1) || product.images[0];
+                product.image_url = mainImage.url;
+            } else {
+                product.image_url = "";
+            }
+
+            // Kiểm tra quyền sở hữu (Security)
+            if (product.seller_id !== req.session.user.user_id) {
+                return res.send("Bạn không có quyền sửa sản phẩm này");
+            }
+
             res.render('seller/edit-product', { product });
+
         } catch (err) {
+            console.log(err); // Log lỗi ra terminal để dễ debug
             res.send("Lỗi tải form sửa");
         }
     },
@@ -56,7 +88,7 @@ const SellerController = {
             const productId = req.params.id;
             const data = {
                 seller_id: req.session.user.user_id,
-                ...req.body // Lấy hết dữ liệu từ form
+                ...req.body 
             };
             await Product.update(productId, data);
             res.redirect('/seller/dashboard');
@@ -73,6 +105,7 @@ const SellerController = {
             await Product.delete(req.params.id, sellerId);
             res.redirect('/seller/dashboard');
         } catch (err) {
+            console.log(err);
             res.send("Lỗi xóa sản phẩm");
         }
     }
