@@ -13,12 +13,17 @@
         <div class="nav-links">
             <% if (user) { %>
                 <span class="user-name">Xin chào, <b><%= user.full_name || user.username %></b></span>
+        
+            <% if (user.role === 'Seller') { %>
+                <a href="/seller/dashboard" class="btn-dashboard">🏪 Quản lý Shop</a>
+            <% } %>
+
                 <a href="/logout" class="btn-auth btn-login">Đăng xuất</a>
+
             <% } else { %>
                 <a href="/login" class="btn-auth btn-login">Đăng nhập</a>
-        
                 <a href="/register" class="btn-auth btn-register">Đăng ký</a>
-             <% } %>
+        <% } %>
              <a href="/cart" class="nav-cart">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
