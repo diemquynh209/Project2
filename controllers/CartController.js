@@ -12,7 +12,7 @@ const CartController = {
                 return res.redirect('/'); 
             }
 
-            // Xử lý lấy ảnh đại diện (Do DB mới tách bảng ảnh)
+            // Xử lý lấy ảnh đại diện 
             let mainImage = '/images/no-image.jpg';
             if (product.images && product.images.length > 0) {
                 // Tìm ảnh được đánh dấu là main, nếu không có lấy ảnh đầu tiên
@@ -35,7 +35,7 @@ const CartController = {
                     product_id: product.product_id,
                     name: product.name,
                     price: product.price,
-                    image_url: mainImage, // Đã sửa để lấy đúng link ảnh
+                    image_url: mainImage, 
                     quantity: 1
                 });
             }

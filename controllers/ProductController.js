@@ -50,7 +50,7 @@ const ProductController = {
         }
     },
 
-    // 3. (MỚI) Trang chi tiết sản phẩm
+    // 3. Trang chi tiết sản phẩm
     detail: async (req, res) => {
         try {
             const productId = req.params.id;
