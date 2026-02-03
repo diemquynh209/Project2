@@ -52,14 +52,12 @@ const SellerController = {
     // 4. Hiển thị form Sửa 
     getEditProduct: async (req, res) => {
         try {
-            // SỬA 1: Đổi findById thành getById
+            
             const product = await Product.getById(req.params.id);
             
             if (!product) {
                 return res.redirect('/seller/dashboard');
             }
-
-            // SỬA 2: Xử lý hiển thị ảnh 
             
             if (product.images && product.images.length > 0) {
         
@@ -77,7 +75,7 @@ const SellerController = {
             res.render('seller/edit-product', { product });
 
         } catch (err) {
-            console.log(err); // Log lỗi ra terminal để dễ debug
+            console.log(err); // Log lỗi ra terminal 
             res.send("Lỗi tải form sửa");
         }
     },
